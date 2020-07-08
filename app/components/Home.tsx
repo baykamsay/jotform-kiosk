@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes.json';
-// import styles from './Home.css';
 
 export default function Home(): JSX.Element {
   return (
@@ -33,9 +32,9 @@ export default function Home(): JSX.Element {
         />
         <ul className="navbar-nav px-3">
           <li className="nav-item text-nowrap">
-            <a className="nav-link" href="baykam.me">
-              Sign out
-            </a>
+            <Link to={routes.SIGNIN} className="nav-link">
+              Sign In
+            </Link>
           </li>
         </ul>
       </nav>
