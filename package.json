@@ -93,12 +93,26 @@
     "directories": {
       "buildResources": "resources",
       "output": "release"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "baykamsay",
+      "repo": "jotform-kiosk",
+      "private": false
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baykamsay/jotform-kiosk.git"
   },
   "author": {
     "name": "Baykam Say",
     "email": "baykam.say@gmail.com",
     "url": "https://baykam.me"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/baykamsay/jotform-kiosk/issues"
   },
   "keywords": [
     "jotform",
@@ -106,6 +120,7 @@
     "kiosk",
     "survey"
   ],
+  "homepage": "https://github.com/baykamsay/jotform-kiosk#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
