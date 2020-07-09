@@ -14,14 +14,14 @@ export default () => {
           height="72"
         />
         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label htmlFor="inputEmail" className="sr-only">
-          Email address
+        <label htmlFor="inputUserName" className="sr-only">
+          User Name
         </label>
         <input
-          type="email"
-          id="inputEmail"
+          type="text"
+          id="inputUserName"
           className="form-control"
-          placeholder="Email address"
+          placeholder="User Name"
           required
         />
         <label htmlFor="inputPassword" className="sr-only">

@@ -2,6 +2,19 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import "./root.css";
 
+function handleSignin() {
+  JF.login(
+    function () {
+      JF.getUser(function (resp) {
+        console.log(resp);
+      });
+    },
+    function () {
+      //login failed
+    }
+  );
+}
+
 export default () => (
   <div>
     <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -28,9 +41,12 @@ export default () => (
       />
       <ul className="navbar-nav px-3">
         <li className="nav-item text-nowrap">
-          <Link to="/signin" id="signin" className="nav-link">
+          {/* <Link to="/signin" id="signin" className="nav-link">
             Sign In
-          </Link>
+          </Link> */}
+          <button className="nav-link" onClick={handleSignin}>
+            Sign In
+          </button>
         </li>
       </ul>
     </nav>
