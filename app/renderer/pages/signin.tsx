@@ -36,14 +36,13 @@ export default () => {
         />
         <div className="checkbox mb-3">
           <label>
-            <input type="checkbox" value="remember-me" />
-            Remember me
+            <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div>
         <button className="btn btn-lg btn-primary btn-block" type="submit">
           Sign in
         </button>
-        <p className="mt-5 mb-3 text-muted">&copy; 2020</p>
+        <p className="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
         <Link to="/">Back to home</Link>
       </form>
     </div>
