@@ -107,5 +107,20 @@
     "electron-is-dev": "^1.2.0",
     "jotform": "^0.1.4",
     "jquery": "^3.5.1"
+  },
+  "resolutions": {
+    "spectron/webdriverio/optimist/minimist": "1.2.5",
+    "jotform/request/qs": "6.9.4",
+    "jotform/request/hawk": "7.0.10",
+    "jotform/request": "2.88.2",
+    "jotform/request/http-signature": "1.3.4",
+    "jotform/request/form-data/mime": "2.4.6",
+    "jotform/request/mime": "2.4.6",
+    "jotform/request/hawk/boom/hoek": "6.1.3",
+    "jotform/request/hawk/cryptiles/boom/hoek": "6.1.3",
+    "jotform/request/hawk/sntp/hoek": "6.1.3",
+    "jotform/request/hawk/hoek": "6.1.3",
+    "jotform/request/tunnel-agent": "0.6.0",
+    "jotform/request/hawk/cryptiles": "4.1.3"
   }
 }
