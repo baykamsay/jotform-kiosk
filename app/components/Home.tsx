@@ -1,32 +1,41 @@
-import React from 'react';
-// import JF from 'jotform';
+import React, { Component } from 'react';
 import { ipcRenderer } from 'electron';
 import { Link } from 'react-router-dom';
+import Sidebar from '../features/sidebar/Sidebar';
+import FormList from '../features/formlist/FormList';
 import routes from '../constants/routes.json';
+// import JF from '../JotForm';
+
 // import styles from './Home.css';
 
-async function handleSignin() {
-  // JF.initialize({
-  //   enableCookieAuth: true,
-  //   appName: 'JotForm Kiosk',
-
-  //   // change to "full" if necessary in the future
-  //   accessType: 'readOnly',
-  // });
-  // JF.login(
-  //   function () {
-  //     JF.getUser(async function (resp: any) {
-  //       await ipcRenderer.invoke("setStoreValue", "apiKey", "sghtkri34254365");
-  //     });
-  //   },
-  //   function () {
-  //     console.log('Error Signing In');
-  //     handleSignin();
-  //   }
+function handleSignin() {
+  // const signIn = new XMLHttpRequest();
+  // signIn.open(
+  //   'POST',
+  //   'https://api.jotform.com/user/login?username=baykam.say&password=1Jandarma.2Orangutan&appName=JotFormKiosk&access=readOnly',
+  //   false
   // );
-
-  ipcRenderer.invoke('setStoreValue', 'test2', 'Hey!');
-  console.log(ipcRenderer.invoke('getStoreValue', 'test2'));
+  // signIn.send(null);
+  // console.log(signIn.response);
+  // return signIn.responseText;
+  JF.initialize({
+    enableCookieAuth: true,
+    appName: 'JotForm Kiosk',
+    // change to "full" if necessary in the future
+    accessType: 'full',
+  });
+  JF.login(
+    function () {
+      JF.getUser(async function (resp: any) {
+        await ipcRenderer.invoke('setStoreValue', 'apiKey', JF.getAPIKey());
+        console.log('logged in');
+      });
+    },
+    function () {
+      console.log('Error Signing In');
+      handleSignin();
+    }
+  );
 }
 
 export default function Home(): JSX.Element {
@@ -62,7 +71,11 @@ export default function Home(): JSX.Element {
             {/* <Link to={routes.COUNTER} id="signin" className="nav-link">
               Sign In
             </Link> */}
-            <button type="button" className="nav-link" onClick={handleSignin}>
+            <button
+              type="button"
+              className="nav-link btn"
+              onClick={handleSignin}
+            >
               Sign In
             </button>
           </li>
@@ -75,141 +88,14 @@ export default function Home(): JSX.Element {
             id="sidebarMenu"
             className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
           >
-            <div className="sidebar-sticky pt-3">
-              <ul className="nav flex-column">
-                <li className="nav-item">
-                  <a className="nav-link active" href="baykam.me">
-                    <span data-feather="home" />
-                    Forms
-                    <span className="sr-only">(current)</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="baykam.me">
-                    <span data-feather="file" />
-                    Submissions
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="baykam.me">
-                    <span data-feather="shopping-cart" />
-                    Settings
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <Sidebar />
           </nav>
 
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
               <h1>My Forms</h1>
-              <div className="btn-toolbar mb-2 mb-md-0">
-                <div className="btn-group mr-2">
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-outline-secondary"
-                  >
-                    Share
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-outline-secondary"
-                  >
-                    Export
-                  </button>
-                </div>
-              </div>
             </div>
-
-            <h2>Ready</h2>
-            <div className="table-responsive">
-              <table className="table table-striped table-sm">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1,007</td>
-                    <td>sagittis</td>
-                    <td>ipsum</td>
-                    <td>Praesent</td>
-                    <td>mauris</td>
-                  </tr>
-                  <tr>
-                    <td>1,008</td>
-                    <td>Fusce</td>
-                    <td>nec</td>
-                    <td>tellus</td>
-                    <td>sed</td>
-                  </tr>
-                  <tr>
-                    <td>1,009</td>
-                    <td>augue</td>
-                    <td>semper</td>
-                    <td>porta</td>
-                    <td>Mauris</td>
-                  </tr>
-                  <tr>
-                    <td>1,010</td>
-                    <td>massa</td>
-                    <td>Vestibulum</td>
-                    <td>lacinia</td>
-                    <td>arcu</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <h2>Available to Download</h2>
-            <div className="table-responsive">
-              <table className="table table-striped table-sm">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1,007</td>
-                    <td>sagittis</td>
-                    <td>ipsum</td>
-                    <td>Praesent</td>
-                    <td>mauris</td>
-                  </tr>
-                  <tr>
-                    <td>1,008</td>
-                    <td>Fusce</td>
-                    <td>nec</td>
-                    <td>tellus</td>
-                    <td>sed</td>
-                  </tr>
-                  <tr>
-                    <td>1,009</td>
-                    <td>augue</td>
-                    <td>semper</td>
-                    <td>porta</td>
-                    <td>Mauris</td>
-                  </tr>
-                  <tr>
-                    <td>1,010</td>
-                    <td>massa</td>
-                    <td>Vestibulum</td>
-                    <td>lacinia</td>
-                    <td>arcu</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <FormList />
           </main>
         </div>
       </div>

@@ -9,7 +9,7 @@
  * `./app/main.prod.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, globalShortcut } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import Store from 'electron-store';
@@ -129,4 +129,31 @@ ipcMain.handle('setStoreValue', (event, key, value) => {
 
 ipcMain.handle('getStoreValue', (event, key) => {
   return store.get(key);
+});
+
+ipcMain.handle('openForm', (event, url) => {
+  const newWindow = new BrowserWindow({
+    show: false,
+    webPreferences: {
+      webSecurity: false,
+      plugins: true,
+      nodeIntegration: false,
+    },
+    alwaysOnTop: true,
+    kiosk: true,
+  }); // create a new window
+
+  newWindow.loadURL(url);
+  globalShortcut.register('CommandOrControl+Shift+Alt+K', () => {
+    newWindow.close();
+    globalShortcut.unregister('CommandOrControl+Shift+Alt+K'); // error second time!
+  });
+  newWindow.addListener('page-title-updated', (e, title) => {
+    if (title === 'Thank You!') {
+      setTimeout(() => {
+        newWindow.loadURL(url);
+      }, 3000);
+    }
+  });
+  newWindow.show();
 });
