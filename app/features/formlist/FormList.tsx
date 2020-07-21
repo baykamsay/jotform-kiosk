@@ -6,21 +6,28 @@ function formClick(url: string) {
   ipcRenderer.invoke('openForm', url);
 }
 
-const FormList = () => {
+const FormList = (props) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       let result;
-      // eslint-disable-next-line promise/always-return
-      await JF.getForms().then((r: any) => {
-        result = r;
-      });
+      if (props.folder) {
+        // eslint-disable-next-line promise/always-return
+        await JF.getFolder(props.folder).then((r: any) => {
+          result = r.forms;
+        });
+      } else {
+        // eslint-disable-next-line promise/always-return
+        await JF.getForms().then((r: any) => {
+          result = r;
+        });
+      }
       setData(result);
     }
 
     fetchData();
-  }, []);
+  }, [props.folder]);
 
   return (
     <div className="list-group container">

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { ipcRenderer } from 'electron';
 import { Link } from 'react-router-dom';
 import Sidebar from '../features/sidebar/Sidebar';
@@ -39,6 +39,10 @@ function handleSignin() {
 }
 
 export default function Home(): JSX.Element {
+  const [folderId, setFolderId] = useState('');
+  function handleSelect(e) {
+    setFolderId(e.target.dataset.id);
+  }
   return (
     <div>
       <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -88,14 +92,14 @@ export default function Home(): JSX.Element {
             id="sidebarMenu"
             className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
           >
-            <Sidebar />
+            <Sidebar onSelect={handleSelect} />
           </nav>
 
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
               <h1>My Forms</h1>
             </div>
-            <FormList />
+            <FormList folder={folderId} />
           </main>
         </div>
       </div>

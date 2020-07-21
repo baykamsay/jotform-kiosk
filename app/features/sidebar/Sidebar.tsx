@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import JF from '../../JotForm';
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -21,18 +21,25 @@ const Sidebar = () => {
     <div className="sidebar-sticky pt-3">
       <ul className="nav flex-column">
         <li className="nav-item">
-          <a className="nav-link active" href="baykam.me">
-            <span data-feather="home" />
+          <button
+            type="button"
+            className="btn btn-link nav-link"
+            data-id={undefined}
+            onClick={props.onSelect}
+          >
             All Forms
-            <span className="sr-only">(current)</span>
-          </a>
+          </button>
         </li>
         {data.map((item) => (
           <li key={item.id} className="nav-item">
-            <a className="nav-link" href="baykam.me">
-              <span data-feather="file" />
+            <button
+              type="button"
+              className="btn btn-link nav-link"
+              data-id={item.id}
+              onClick={props.onSelect}
+            >
               {item.name}
-            </a>
+            </button>
           </li>
         ))}
       </ul>
