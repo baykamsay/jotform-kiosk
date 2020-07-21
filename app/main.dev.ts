@@ -121,7 +121,9 @@ app.on('activate', () => {
 
 const store = new Store();
 
-store.clear(); // delete this!
+// store.clear(); // delete this!
+
+store.set('test2', 'anotherValue');
 
 ipcMain.handle('setStoreValue', (event, key, value) => {
   return store.set(key, value);
@@ -129,6 +131,10 @@ ipcMain.handle('setStoreValue', (event, key, value) => {
 
 ipcMain.handle('getStoreValue', (event, key) => {
   return store.get(key);
+});
+
+ipcMain.handle('clear', (event) => {
+  return store.clear();
 });
 
 ipcMain.handle('openForm', (event, url) => {
