@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Layout } from 'antd';
 import { shell } from 'electron';
+import jotFormIcon from '../../resources/brand-resources/jotform-icon.png';
 
 const { Content } = Layout;
 
@@ -27,7 +28,17 @@ export default function Login(props: {
           initialValues={{ remember: true }}
           onFinish={props.onLogin}
           onFinishFailed={onFinishFailed}
+          style={{ backgroundColor: '#f5f5f5', padding: 24, borderRadius: 4 }}
         >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: 50,
+            }}
+          >
+            <img src={jotFormIcon} alt="jotform icon" style={{ width: 200 }} />
+          </div>
           <Form.Item
             label="Username"
             name="username"

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Layout, Menu, Breadcrumb, Row, Col, Button, Divider } from 'antd';
 import Sidebar from '../features/sidebar/Sidebar';
 import FormList from '../features/formlist/FormList';
+import jotFormLogo from '../../resources/brand-resources/jotform-logo.png';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -19,11 +20,16 @@ export default function MainApp(props: {
     <Layout style={{ minHeight: '100vh' }}>
       <Header
         className="header"
-        style={{ position: 'fixed', zIndex: 1, width: '100%' }}
+        style={{
+          position: 'fixed',
+          zIndex: 1,
+          width: '100%',
+          padding: '0 24px',
+        }}
       >
         <Row>
           <Col flex="200px">
-            <div className="logo" />
+            <img className="logo" src={jotFormLogo} alt="jotform logo" />
           </Col>
           <Col flex="auto" />
           <Col>
