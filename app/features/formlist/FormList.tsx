@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ipcRenderer, shell } from 'electron';
+import { Menu, Button, Row, Col } from 'antd';
+import ButtonGroup from 'antd/lib/button/button-group';
 import JF from '../../JotForm';
 
 function formClick(url: string) {
@@ -12,7 +14,7 @@ const FormList = (props) => {
   useEffect(() => {
     async function fetchData() {
       let result;
-      if (props.folder) {
+      if (props.folder && props.folder !== '1') {
         // eslint-disable-next-line promise/always-return
         await JF.getFolder(props.folder).then((r: any) => {
           result = r.forms;
@@ -35,35 +37,64 @@ const FormList = (props) => {
   }
 
   return (
-    <div className="list-group container">
+    <Menu mode="inline">
       {data.map((item) => (
-        <li key={item.id} className="list-group-item p-0 row">
-          <button
-            type="button"
-            className="btn col col-sm-9 col-lg-10"
-            onClick={() => {
-              formClick(item.url);
-            }}
-          >
-            {item.title}
-          </button>
-          <div className="btn-group col col-sm-3 col-lg-2" role="group">
-            <button type="button" className="btn btn-sm btn-outline-secondary">
-              Submissions
-            </button>
-            <button
-              type="button"
-              className="btn btn-sm btn-outline-secondary"
+        <Menu.Item key={item.id}>
+          <Row>
+            <Col
+              flex="auto"
               onClick={() => {
-                editForm(item.id);
+                formClick(item.url);
               }}
             >
-              Edit
-            </button>
-          </div>
-        </li>
+              {item.title}
+            </Col>
+            <Col flex="200px">
+              <ButtonGroup>
+                <Button type="default">Submissions</Button>
+                <Button
+                  type="default"
+                  onClick={() => {
+                    editForm(item.id);
+                  }}
+                >
+                  Edit
+                </Button>
+              </ButtonGroup>
+            </Col>
+          </Row>
+        </Menu.Item>
       ))}
-    </div>
+    </Menu>
+    // <div className="list-group container">
+    //   {data.map((item) => (
+    //     <li key={item.id} className="list-group-item p-0 row">
+    //       <button
+    //         type="button"
+    //         className="btn col col-sm-9 col-lg-10"
+    //         onClick={() => {
+    //           formClick(item.url);
+    //         }}
+    //       >
+    //         {item.title}
+    //       </button>
+    //       <div className="btn-group col col-sm-3 col-lg-2" role="group">
+    //         <button type="button" className="btn btn-sm btn-outline-secondary">
+    //           Submissions
+    //         </button>
+    //         <button
+    //           type="button"
+    //           className="btn btn-sm btn-outline-secondary"
+    //           onClick={() => {
+    //             editForm(item.id);
+    //           }}
+    //         >
+    //           Edit
+    //         </button>
+    //       </div>
+    //     </li>
+    //   ))}
+    // </div>
     // <ul className="list-group">
     //   {data.map((item) => (
     //     <li

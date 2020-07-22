@@ -11,14 +11,7 @@ export default function Home(): JSX.Element {
     refresh();
   }, [apiKey]);
 
-  async function handleLogin(e: {
-    target: {
-      dataset: {
-        username: React.SetStateAction<string>;
-        password: React.SetStateAction<string>;
-      };
-    };
-  }) {
+  async function handleLogin(values: { username: string; password: string }) {
     // console.log(e.target.dataset.username);
     // console.log(e.target.dataset.password);
     const url = 'https://api.jotform.com/user/login';
@@ -27,7 +20,7 @@ export default function Home(): JSX.Element {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       method: 'POST',
-      body: `username=${e.target.dataset.username}&password=${e.target.dataset.password}&appName=JotForm Kiosk&access=readOnly`,
+      body: `username=${values.username}&password=${values.password}&appName=JotForm Kiosk&access=readOnly`,
     };
     fetch(url, otherParams)
       .then((dataIn) => dataIn.json())

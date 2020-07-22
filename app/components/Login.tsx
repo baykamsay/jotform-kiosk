@@ -1,50 +1,69 @@
 import React, { useState } from 'react';
+import { Form, Input, Button, Layout } from 'antd';
+import { shell } from 'electron';
+
+const { Content } = Layout;
 
 export default function Login(props: {
   onLogin:
-    | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+    | ((values: import('rc-field-form/lib/interface').Store) => void)
     | undefined;
 }): JSX.Element {
-  const [jotformUsername, updateJotformUsername] = useState('');
-  const [jotformPassword, updateJotformPassword] = useState('');
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
 
   return (
-    <div className="container-fluid">
-      <form className="mx-auto">
-        <div className="form-group">
-          <label htmlFor="inputUsername">
-            Username
-            <input
-              type="text"
-              className="form-control"
-              id="inputUsername"
-              value={jotformUsername}
-              onChange={(e) => updateJotformUsername(e.target.value)}
-            />
-          </label>
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputPassword">
-            Password
-            <input
-              type="password"
-              className="form-control"
-              id="inputPassword"
-              value={jotformPassword}
-              onChange={(e) => updateJotformPassword(e.target.value)}
-            />
-          </label>
-        </div>
-        <button
-          type="submit"
-          onClick={props.onLogin}
-          className="btn btn-primary"
-          data-username={jotformUsername}
-          data-password={jotformPassword}
+    <Layout style={{ minHeight: '100vh' }}>
+      <Content
+        style={{
+          // backgroundColor: 'red',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Form
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={props.onLogin}
+          onFinishFailed={onFinishFailed}
         >
-          Submit
-        </button>
-      </form>
-    </div>
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: 'Please input your username!' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="link"
+              onClick={() => {
+                const url = 'https://www.jotform.com/signup/';
+                shell.openExternal(url);
+              }}
+            >
+              Don&apos;t have a JotForm account?
+            </Button>
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Content>
+    </Layout>
   );
 }
