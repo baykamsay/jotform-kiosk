@@ -2,17 +2,22 @@ import { ipcRenderer } from 'electron';
 
 const JF = require('jotform');
 
-let key;
+export function refresh() {
+  ipcRenderer
+    .invoke('getStoreValue', 'apiKey')
+    .then((response) => {
+      if (response) {
+        JF.options({
+          debug: true,
+          apiKey: response,
+        });
+        return true;
+      }
+      return false;
+    })
+    .catch((error) => console.log(error));
+}
 
-ipcRenderer
-  .invoke('getStoreValue', 'apiKey')
-  .then((response) => {
-    JF.options({
-      debug: true,
-      apiKey: response,
-    });
-    return true;
-  })
-  .catch((error) => console.log(error));
+refresh();
 
 export default JF;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from '../features/sidebar/Sidebar';
 import FormList from '../features/formlist/FormList';
 
-export default function MainApp(): JSX.Element {
+export default function MainApp(props): JSX.Element {
   const [folderId, setFolderId] = useState('');
   function handleSelect(e: {
     target: { dataset: { id: React.SetStateAction<string> } };
@@ -44,9 +44,7 @@ export default function MainApp(): JSX.Element {
             <button
               type="button"
               className="nav-link btn"
-              onClick={() => {
-                console.log('Will do');
-              }}
+              onClick={props.onLogout}
             >
               Sign Out
             </button>

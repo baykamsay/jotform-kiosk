@@ -133,6 +133,10 @@ ipcMain.handle('getStoreValue', (event, key) => {
   return store.get(key);
 });
 
+ipcMain.handle('deleteStoreValue', (event, key) => {
+  return store.delete(key);
+});
+
 ipcMain.handle('clear', (event) => {
   return store.clear();
 });

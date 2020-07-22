@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ipcRenderer } from 'electron';
 import MainApp from './MainApp';
 import Login from './Login';
+import { refresh } from '../JotForm';
 
 export default function Home(): JSX.Element {
   const [apiKey, setApiKey] = useState('');
+
+  useEffect(() => {
+    refresh();
+  }, [apiKey]);
 
   async function handleLogin(e: {
     target: {
@@ -39,12 +44,18 @@ export default function Home(): JSX.Element {
         console.log(error);
       });
   }
+
+  async function handleLogout() {
+    setApiKey('');
+    await ipcRenderer.invoke('deleteStoreValue', 'apiKey');
+  }
+
   // add use effect to tie apiKey storage and useState
   ipcRenderer
     .invoke('getStoreValue', 'apiKey')
     .then((response) => setApiKey(response))
     .catch((error) => console.log(error));
   console.log(`apiKey is ${apiKey}`);
-  if (apiKey) return <MainApp />;
+  if (apiKey) return <MainApp onLogout={handleLogout} />;
   return <Login onLogin={handleLogin} />;
 }
