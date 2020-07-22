@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 import JF from '../../JotForm';
 
 function formClick(url: string) {
@@ -29,6 +29,11 @@ const FormList = (props) => {
     fetchData();
   }, [props.folder]);
 
+  function editForm(id) {
+    const url = `https://www.jotform.com/build/${id}`;
+    shell.openExternal(url);
+  }
+
   return (
     <div className="list-group container">
       {data.map((item) => (
@@ -46,7 +51,13 @@ const FormList = (props) => {
             <button type="button" className="btn btn-sm btn-outline-secondary">
               Submissions
             </button>
-            <button type="button" className="btn btn-sm btn-outline-secondary">
+            <button
+              type="button"
+              className="btn btn-sm btn-outline-secondary"
+              onClick={() => {
+                editForm(item.id);
+              }}
+            >
               Edit
             </button>
           </div>
