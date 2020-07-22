@@ -17,7 +17,6 @@ export default function Login(props: {
     <Layout style={{ minHeight: '100vh' }}>
       <Content
         style={{
-          // backgroundColor: 'red',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
