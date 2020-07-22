@@ -17,7 +17,10 @@ export default function MainApp(props: {
   }
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Header className="header">
+      <Header
+        className="header"
+        style={{ position: 'fixed', zIndex: 1, width: '100%' }}
+      >
         <Row>
           <Col flex="200px">
             <div className="logo" />
@@ -30,11 +33,20 @@ export default function MainApp(props: {
           </Col>
         </Row>
       </Header>
-      <Layout>
-        <Sider width={200} className="site-layout-background">
+      <Layout style={{ marginTop: 64 }}>
+        <Sider
+          width={200}
+          className="site-layout-background"
+          style={{
+            overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
+            left: 0,
+          }}
+        >
           <Sidebar onSelect={handleSelect} />
         </Sider>
-        <Layout style={{ padding: '24px 24px' }}>
+        <Layout style={{ padding: '24px 24px', marginLeft: 200 }}>
           {/* <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
