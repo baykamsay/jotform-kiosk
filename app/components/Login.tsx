@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Layout } from 'antd';
 import { shell } from 'electron';
+import styles from './Login.css';
 import jotFormIcon from '../../resources/brand-resources/jotform-icon.png';
 
 const { Content } = Layout;
@@ -15,12 +16,13 @@ export default function Login(props: {
   };
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
       <Content
         style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          zIndex: 2,
         }}
       >
         <Form
@@ -28,7 +30,12 @@ export default function Login(props: {
           initialValues={{ remember: true }}
           onFinish={props.onLogin}
           onFinishFailed={onFinishFailed}
-          style={{ backgroundColor: '#f5f5f5', padding: 24, borderRadius: 4 }}
+          style={{
+            backgroundColor: '#f5f5f5',
+            padding: 24,
+            borderRadius: 4,
+            boxShadow: '2px 2px 6px -3px rgba(0,0,0,0.15)',
+          }}
         >
           <div
             style={{
@@ -74,6 +81,12 @@ export default function Login(props: {
           </Form.Item>
         </Form>
       </Content>
+      <div className={styles.cube} />
+      <div className={styles.cube} />
+      <div className={styles.cube} />
+      <div className={styles.cube} />
+      <div className={styles.cube} />
+      <div className={styles.cube} />
     </Layout>
   );
 }
