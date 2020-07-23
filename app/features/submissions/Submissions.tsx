@@ -15,36 +15,46 @@ const Submissions = (props: {
         return setData(r);
       });
     }
-    fetchData();
-  }, [props]);
-  const titles = [];
-
-  Object.values(data[0]['answers']).forEach((e) => {
-    titles.push(e['text']);
-  });
-  let i = 1;
-  const dataSource = data.map((submission) => {
-    const answerList: { [k: string]: any } = {};
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const key in submission.answers) {
-      if (submission.answers.hasOwnProperty(key)) {
-        answerList[submission.answers[key]['name']] =
-          submission.answers[key]['answer'];
-      }
+    if (props.formID !== 0) {
+      fetchData();
     }
-    answerList['key'] = i++;
-    return answerList;
-  });
+  }, [props]);
 
   let columns = [];
+  let dataSource;
+  if (data.length !== 0) {
+    const titles = [];
 
-  i = 0;
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in dataSource[0]) {
-    if (dataSource[0].hasOwnProperty(key)) {
-      if (key !== 'key') {
-        columns.push({ title: titles[i++], dataIndex: key, key });
+    Object.values(data[0]['answers']).forEach((e) => {
+      titles.push(e['text']);
+    });
+    let i = 1;
+    dataSource = data.map((submission) => {
+      const answerList: { [k: string]: any } = {};
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const key in submission.answers) {
+        if (submission.answers.hasOwnProperty(key)) {
+          if (typeof submission.answers[key]['answer'] === 'object') {
+            const arr = Object.values(submission.answers[key]['answer']);
+            answerList[submission.answers[key]['name']] = arr.toString();
+          } else {
+            answerList[submission.answers[key]['name']] =
+              submission.answers[key]['answer'];
+          }
+        }
+      }
+      answerList['key'] = i++;
+      return answerList;
+    });
+
+    i = 0;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in dataSource[0]) {
+      if (dataSource[0].hasOwnProperty(key)) {
+        if (key !== 'key') {
+          columns.push({ title: titles[i++], dataIndex: key, key });
+        }
       }
     }
   }
