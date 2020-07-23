@@ -4,7 +4,6 @@ import Sidebar from '../features/sidebar/Sidebar';
 import FormList from '../features/formlist/FormList';
 import jotFormLogo from '../../resources/brand-resources/jotform-logo.png';
 
-const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 export default function MainApp(props: {

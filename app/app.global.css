@@ -16,6 +16,17 @@
   background: #fff;
 }
 
+/* .form-wrapper {
+  border: 1px solid grey;
+  border-bottom: 0;
+  border-radius: 4px;
+} */
+
+.form-item:hover {
+  background-color: #e6f7ff;
+  border-left: 3px solid #1890ff;
+}
+
 /*
 body {
   font-size: 0.875rem;
