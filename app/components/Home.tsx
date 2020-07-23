@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ipcRenderer } from 'electron';
+import { message } from 'antd';
 import MainApp from './MainApp';
 import Login from './Login';
 import { refresh } from '../JotForm';
@@ -25,7 +26,6 @@ export default function Home(): JSX.Element {
     fetch(url, otherParams)
       .then((dataIn) => dataIn.json())
       .then(async (response) => {
-        console.log(response);
         setApiKey(response.content.appKey);
         return ipcRenderer.invoke(
           'setStoreValue',
@@ -34,7 +34,7 @@ export default function Home(): JSX.Element {
         );
       })
       .catch((error) => {
-        console.log(error);
+        message.error('Error logging in, please check your password!');
       });
   }
 

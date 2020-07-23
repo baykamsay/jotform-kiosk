@@ -92,8 +92,9 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
+  // const menuBuilder = new MenuBuilder(mainWindow);
+  // menuBuilder.buildMenu();
+  mainWindow.removeMenu();
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
@@ -121,8 +122,6 @@ app.on('activate', () => {
 });
 
 const store = new Store();
-
-// store.clear(); // delete this!
 
 store.set('test2', 'anotherValue');
 

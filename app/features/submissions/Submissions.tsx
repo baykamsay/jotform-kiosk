@@ -37,7 +37,9 @@ const Submissions = (props: {
         if (submission.answers.hasOwnProperty(key)) {
           if (typeof submission.answers[key]['answer'] === 'object') {
             const arr = Object.values(submission.answers[key]['answer']);
-            answerList[submission.answers[key]['name']] = arr.toString();
+            answerList[
+              submission.answers[key]['name']
+            ] = arr.toString().replace(/,/g, '\t');
           } else {
             answerList[submission.answers[key]['name']] =
               submission.answers[key]['answer'];
@@ -70,7 +72,7 @@ const Submissions = (props: {
       bodyStyle={{ height: '80vh' }}
       centered
     >
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={dataSource} columns={columns} bordered />
     </Modal>
   );
 };
