@@ -13,7 +13,7 @@ import { app, BrowserWindow, ipcMain, globalShortcut } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import Store from 'electron-store';
-import MenuBuilder from './menu';
+// import MenuBuilder from './menu';
 
 export default class AppUpdater {
   constructor() {
@@ -125,23 +125,23 @@ const store = new Store();
 
 store.set('test2', 'anotherValue');
 
-ipcMain.handle('setStoreValue', (event, key, value) => {
+ipcMain.handle('setStoreValue', (_event, key, value) => {
   return store.set(key, value);
 });
 
-ipcMain.handle('getStoreValue', (event, key) => {
+ipcMain.handle('getStoreValue', (_event, key) => {
   return store.get(key);
 });
 
-ipcMain.handle('deleteStoreValue', (event, key) => {
+ipcMain.handle('deleteStoreValue', (_event, key) => {
   return store.delete(key);
 });
 
-ipcMain.handle('clear', (event) => {
+ipcMain.handle('clear', () => {
   return store.clear();
 });
 
-ipcMain.handle('openForm', (event, url) => {
+ipcMain.handle('openForm', (_event, url) => {
   const newWindow = new BrowserWindow({
     show: false,
     webPreferences: {
@@ -158,7 +158,7 @@ ipcMain.handle('openForm', (event, url) => {
     newWindow.close();
     globalShortcut.unregister('CommandOrControl+Shift+Alt+K'); // error second time!
   });
-  newWindow.addListener('page-title-updated', (e, title) => {
+  newWindow.addListener('page-title-updated', (_e, title) => {
     if (title === 'Thank You!') {
       setTimeout(() => {
         newWindow.loadURL(url);

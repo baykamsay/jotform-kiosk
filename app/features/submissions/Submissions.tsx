@@ -1,5 +1,8 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Table } from 'antd';
+import { Modal, Table } from 'antd';
 import JF from '../../JotForm';
 
 const Submissions = (props: {
@@ -20,10 +23,10 @@ const Submissions = (props: {
     }
   }, [props]);
 
-  let columns = [];
+  const columns = [];
   let dataSource;
   if (data.length !== 0) {
-    const titles = [];
+    const titles: any[] = [];
 
     Object.values(data[0]['answers']).forEach((e) => {
       titles.push(e['text']);

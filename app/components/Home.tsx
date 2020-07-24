@@ -13,8 +13,6 @@ export default function Home(): JSX.Element {
   }, [apiKey]);
 
   async function handleLogin(values: { username: string; password: string }) {
-    // console.log(e.target.dataset.username);
-    // console.log(e.target.dataset.password);
     const url = 'https://api.jotform.com/user/login';
     const otherParams = {
       headers: {
@@ -33,7 +31,7 @@ export default function Home(): JSX.Element {
           response.content.appKey
         );
       })
-      .catch((error) => {
+      .catch(() => {
         message.error('Error logging in, please check your password!');
       });
   }
@@ -43,12 +41,10 @@ export default function Home(): JSX.Element {
     await ipcRenderer.invoke('deleteStoreValue', 'apiKey');
   }
 
-  // add use effect to tie apiKey storage and useState
   ipcRenderer
     .invoke('getStoreValue', 'apiKey')
     .then((response) => setApiKey(response))
     .catch((error) => console.log(error));
-  console.log(`apiKey is ${apiKey}`);
   if (apiKey) return <MainApp onLogout={handleLogout} />;
   return <Login onLogin={handleLogin} />;
 }

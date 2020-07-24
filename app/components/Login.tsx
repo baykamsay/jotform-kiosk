@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Button, Layout } from 'antd';
 import { shell } from 'electron';
 import styles from './Login.css';
@@ -11,7 +11,8 @@ export default function Login(props: {
     | ((values: import('rc-field-form/lib/interface').Store) => void)
     | undefined;
 }): JSX.Element {
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = (errorInfo: unknown) => {
+    // eslint-disable-next-line no-console
     console.log('Failed:', errorInfo);
   };
 
