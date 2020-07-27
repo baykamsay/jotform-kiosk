@@ -13,7 +13,6 @@ import { app, BrowserWindow, ipcMain, globalShortcut } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import Store from 'electron-store';
-// import MenuBuilder from './menu';
 
 export default class AppUpdater {
   constructor() {
@@ -92,8 +91,6 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
-  // const menuBuilder = new MenuBuilder(mainWindow);
-  // menuBuilder.buildMenu();
   mainWindow.removeMenu();
 
   // Remove this if your app does not use auto updates
