@@ -25,11 +25,12 @@ export default function Home(): JSX.Element {
       .then((dataIn) => dataIn.json())
       .then(async (response) => {
         setApiKey(response.content.appKey);
-        return ipcRenderer.invoke(
+        await ipcRenderer.invoke(
           'setStoreValue',
           'apiKey',
           response.content.appKey
         );
+        return ipcRenderer.invoke('reload');
       })
       .catch(() => {
         message.error('Error logging in, please check your password!');
@@ -46,6 +47,8 @@ export default function Home(): JSX.Element {
     .then((response) => setApiKey(response))
     // eslint-disable-next-line no-console
     .catch((error) => console.log(error));
-  if (apiKey) return <MainApp onLogout={handleLogout} />;
+  if (apiKey) {
+    return <MainApp onLogout={handleLogout} key={apiKey} />;
+  }
   return <Login onLogin={handleLogin} />;
 }

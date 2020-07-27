@@ -138,6 +138,10 @@ ipcMain.handle('clear', () => {
   return store.clear();
 });
 
+ipcMain.handle('reload', () => {
+  return mainWindow?.reload();
+});
+
 ipcMain.handle('openForm', (_event, url) => {
   const newWindow = new BrowserWindow({
     show: false,
