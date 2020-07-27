@@ -1,7 +1,7 @@
 {
   "name": "jotfrom-kiosk",
   "productName": "jotfrom-kiosk",
-  "version": "0.0.0",
+  "version": "0.9.0",
   "description": "Cross platform desktop app for using JotForm forms in kiosks",
   "main": "./main.prod.js",
   "author": {
