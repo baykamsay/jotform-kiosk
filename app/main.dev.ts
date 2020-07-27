@@ -153,7 +153,7 @@ ipcMain.handle('openForm', (_event, url) => {
     alwaysOnTop: true,
     kiosk: true,
   }); // create a new window
-
+  newWindow.removeMenu();
   newWindow.loadURL(url);
   globalShortcut.register('CommandOrControl+Shift+Alt+K', () => {
     newWindow.close();
