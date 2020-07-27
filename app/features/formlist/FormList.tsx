@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { ipcRenderer, shell } from 'electron';
 import { Menu, Button, Row, Col } from 'antd';
@@ -20,7 +21,7 @@ const FormList = (props: { folder: string }) => {
 
   useEffect(() => {
     async function fetchData() {
-      let result;
+      let result: any;
       if (props.folder && props.folder !== '1') {
         // eslint-disable-next-line promise/always-return
         await JF.getFolder(props.folder).then((r: any) => {
@@ -51,7 +52,7 @@ const FormList = (props: { folder: string }) => {
         formID={selectedForm}
       />
       <Menu mode="inline" className="form-wrapper" selectable={false}>
-        {data.map((item) => (
+        {data.map((item: { id: number; url: string; title: string }) => (
           <Menu.Item key={item.id} className="form-item">
             <Row>
               <Col

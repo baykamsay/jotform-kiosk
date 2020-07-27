@@ -44,6 +44,7 @@ export default function Home(): JSX.Element {
   ipcRenderer
     .invoke('getStoreValue', 'apiKey')
     .then((response) => setApiKey(response))
+    // eslint-disable-next-line no-console
     .catch((error) => console.log(error));
   if (apiKey) return <MainApp onLogout={handleLogout} />;
   return <Login onLogin={handleLogin} />;

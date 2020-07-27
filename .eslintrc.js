@@ -1,6 +1,8 @@
 module.exports = {
   extends: 'erb/typescript',
   rules: {
+    'react/destructuring-assignment': 'off',
+    'no-plusplus': 'off',
     // A temporary hack related to IDE not resolving correct package.json
     'import/no-extraneous-dependencies': 'off',
   },

@@ -1,4 +1,4 @@
-/* eslint-disable no-plusplus */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable @typescript-eslint/dot-notation */
 import React, { useState, useEffect } from 'react';
@@ -26,13 +26,13 @@ const Submissions = (props: {
   const columns = [];
   let dataSource;
   if (data.length !== 0) {
-    const titles: any[] = [];
+    const titles: string[] = [];
 
-    Object.values(data[0]['answers']).forEach((e) => {
+    Object.values(data[0]['answers']).forEach((e: any) => {
       titles.push(e['text']);
     });
     let i = 1;
-    dataSource = data.map((submission) => {
+    dataSource = data.map((submission: { answers: [] }) => {
       const answerList: { [k: string]: any } = {};
 
       // eslint-disable-next-line no-restricted-syntax

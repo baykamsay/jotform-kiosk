@@ -15,7 +15,7 @@ export function refresh() {
       }
       return false;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.log(`Oh noo: ${error}`));
 }
 
 refresh();

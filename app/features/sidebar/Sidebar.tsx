@@ -9,12 +9,9 @@ const Sidebar = (props: {
 
   useEffect(() => {
     async function fetchData() {
-      let result;
-      // eslint-disable-next-line promise/always-return
-      await JF.getFolders().then((r) => {
-        result = r;
+      await JF.getFolders().then((r: { subfolders: [] }) => {
+        return setData(r.subfolders);
       });
-      setData(result.subfolders);
     }
 
     fetchData();
@@ -28,7 +25,7 @@ const Sidebar = (props: {
       onClick={props.onSelect}
     >
       <Menu.Item key="1">All Forms</Menu.Item>
-      {data.map((item) => (
+      {data.map((item: { id: number; name: string }) => (
         <Menu.Item key={item.id}>{item.name}</Menu.Item>
       ))}
     </Menu>
